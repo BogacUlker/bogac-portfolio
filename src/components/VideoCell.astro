@@ -1,0 +1,85 @@
+---
+interface Props {
+  id: number;
+  src?: string;
+  poster?: string;
+  alt?: string;
+}
+
+const { id, src = '', poster = '', alt = '' } = Astro.props;
+const hasVideo = src && src.length > 0;
+---
+
+<div class="video-cell" data-loop-id={id}>
+  {hasVideo ? (
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      poster={poster}
+      class="video-element"
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  ) : (
+    <div class="video-placeholder">
+      <span class="placeholder-number">{id}</span>
+    </div>
+  )}
+  <div class="video-overlay"></div>
+</div>
+
+<style>
+  .video-cell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--color-bg-card);
+  }
+
+  .video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      var(--color-bg-card) 0%,
+      var(--color-bg-secondary) 100%
+    );
+  }
+
+  .placeholder-number {
+    font-size: var(--text-2xl);
+    font-weight: 300;
+    color: var(--color-text-subtle);
+    opacity: 0.3;
+  }
+
+  .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    transition: background 0.3s ease;
+    pointer-events: none;
+  }
+
+  .video-cell:hover .video-overlay {
+    background: rgba(0, 0, 0, 0.1);
+  }
+</style>
