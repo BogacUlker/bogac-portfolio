@@ -1,17 +1,30 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import ShortCard from '../components/ShortCard.astro';
+import VideoModal from '../components/VideoModal.astro';
+import shorts from '../data/shorts.json';
 ---
 
 <PageLayout
   title="Shorts — Boğaç Ülker"
-  description="Vertical short-form content and reels."
+  description="Vertical short-form content, reels, and social media edits by Boğaç Ülker."
 >
   <section class="page-section">
+    <header class="page-header">
+      <h1 class="page-title">Shorts</h1>
+      <p class="page-description">
+        Vertical content for social media, reels, and quick-hit sports moments.
+      </p>
+    </header>
+
     <div class="shorts-grid">
-      <!-- Short cards will be populated from data in Faz 3/4 -->
-      <p class="placeholder-text">Shorts content coming soon.</p>
+      {shorts.map((short) => (
+        <ShortCard {...short} />
+      ))}
     </div>
   </section>
+
+  <VideoModal />
 </PageLayout>
 
 <style>
@@ -21,17 +34,32 @@ import PageLayout from '../layouts/PageLayout.astro';
     margin: 0 auto;
   }
 
+  .page-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .page-title {
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .page-description {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
+  }
+
   .shorts-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: var(--shorts-gap);
+    gap: var(--space-4);
   }
 
-  .placeholder-text {
-    color: var(--color-text-muted);
-    text-align: center;
-    grid-column: 1 / -1;
-    padding: var(--space-16);
+  @media (max-width: 1200px) {
+    .shorts-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   @media (max-width: 1024px) {
@@ -42,11 +70,27 @@ import PageLayout from '../layouts/PageLayout.astro';
 
   @media (max-width: 768px) {
     .page-section {
-      padding: var(--space-4);
+      padding: var(--space-6) var(--space-4);
+    }
+
+    .page-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .page-title {
+      font-size: var(--text-xl);
     }
 
     .shorts-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .shorts-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
     }
   }
 </style>

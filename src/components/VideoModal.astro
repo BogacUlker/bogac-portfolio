@@ -1,0 +1,232 @@
+---
+// VideoModal - Client-side modal for YouTube embeds
+// This component uses vanilla JS for modal functionality
+---
+
+<div id="video-modal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-container">
+    <button class="modal-close" aria-label="Close video">
+      <i class="ph ph-x icon-lg"></i>
+    </button>
+    <div class="modal-content">
+      <div class="video-wrapper">
+        <iframe
+          id="modal-iframe"
+          src=""
+          title="Video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-details">
+        <h2 id="modal-title" class="video-title"></h2>
+        <p id="modal-description" class="video-description"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .modal[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+  }
+
+  .modal-container {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    z-index: 1;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+  }
+
+  .modal[aria-hidden="false"] .modal-container {
+    transform: scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -48px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: var(--space-2);
+    transition: opacity 0.2s ease;
+    z-index: 2;
+  }
+
+  .modal-close:hover {
+    opacity: 0.7;
+  }
+
+  .modal-content {
+    background: var(--color-bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background: var(--color-bg-primary);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-details {
+    padding: var(--space-6);
+  }
+
+  .video-title {
+    font-size: var(--text-xl);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .video-description {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  /* Shorts modal - vertical video */
+  .modal.shorts-modal .video-wrapper {
+    padding-bottom: 177.78%; /* 9:16 aspect ratio */
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .modal.shorts-modal .modal-container {
+    max-width: 450px;
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 95%;
+    }
+
+    .modal-close {
+      top: -40px;
+      right: -8px;
+    }
+
+    .video-details {
+      padding: var(--space-4);
+    }
+
+    .video-title {
+      font-size: var(--text-lg);
+    }
+
+    .video-description {
+      font-size: var(--text-base);
+    }
+  }
+</style>
+
+<script>
+  // Modal functionality
+  const modal = document.getElementById('video-modal');
+  const modalIframe = document.getElementById('modal-iframe') as HTMLIFrameElement;
+  const modalTitle = document.getElementById('modal-title');
+  const modalDescription = document.getElementById('modal-description');
+  const modalBackdrop = modal?.querySelector('.modal-backdrop');
+  const modalClose = modal?.querySelector('.modal-close');
+
+  function openModal(youtubeId: string, title: string, description: string, isShort: boolean = false) {
+    if (!modal || !modalIframe || !modalTitle || !modalDescription) return;
+
+    // Set YouTube embed URL with autoplay
+    modalIframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+
+    // Toggle shorts class for vertical videos
+    modal.classList.toggle('shorts-modal', isShort);
+
+    // Show modal
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modal || !modalIframe) return;
+
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    // Stop video by clearing src
+    setTimeout(() => {
+      modalIframe.src = '';
+    }, 300);
+  }
+
+  // Event listeners for video cards
+  document.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const youtubeId = card.getAttribute('data-youtube-id') || '';
+      const title = card.querySelector('.video-title')?.textContent || '';
+      const description = card.querySelector('.video-description')?.textContent || '';
+      openModal(youtubeId, title, description, false);
+    });
+  });
+
+  // Event listeners for short cards
+  document.querySelectorAll('.short-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const youtubeId = card.getAttribute('data-youtube-id') || '';
+      const title = card.querySelector('.short-title')?.textContent || '';
+      openModal(youtubeId, title, '', true);
+    });
+  });
+
+  // Close modal events
+  modalBackdrop?.addEventListener('click', closeModal);
+  modalClose?.addEventListener('click', closeModal);
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.getAttribute('aria-hidden') === 'false') {
+      closeModal();
+    }
+  });
+</script>

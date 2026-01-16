@@ -1,0 +1,142 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  youtubeId: string;
+  thumbnail: string;
+  duration: string;
+}
+
+const { id, title, youtubeId, thumbnail, duration } = Astro.props;
+---
+
+<article class="short-card" data-short-id={id} data-youtube-id={youtubeId}>
+  <div class="thumbnail-wrapper">
+    <img
+      src={thumbnail}
+      alt={title}
+      class="thumbnail"
+      loading="lazy"
+    />
+    <div class="thumbnail-overlay">
+      <div class="play-button">
+        <i class="ph-fill ph-play icon-lg"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="short-info">
+    <h3 class="short-title">{title}</h3>
+    <span class="short-duration">{duration}</span>
+  </div>
+</article>
+
+<style>
+  .short-card {
+    background-color: var(--color-bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .short-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  .thumbnail-wrapper {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .short-card:hover .thumbnail {
+    transform: scale(1.05);
+  }
+
+  .thumbnail-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .short-card:hover .thumbnail-overlay {
+    opacity: 1;
+  }
+
+  .play-button {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-bg-primary);
+    transition: transform 0.2s ease;
+  }
+
+  .play-button i {
+    margin-left: 3px;
+  }
+
+  .short-card:hover .play-button {
+    transform: scale(1.1);
+  }
+
+  .short-info {
+    padding: var(--space-3);
+  }
+
+  .short-title {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-1);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .short-duration {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .short-info {
+      padding: var(--space-2);
+    }
+
+    .short-title {
+      font-size: var(--text-xs);
+    }
+
+    .play-button {
+      width: 40px;
+      height: 40px;
+    }
+
+    .play-button i {
+      font-size: 18px;
+    }
+  }
+</style>

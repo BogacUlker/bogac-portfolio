@@ -1,5 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import VideoModal from '../components/VideoModal.astro';
+import videos from '../data/longform.json';
 ---
 
 <PageLayout
@@ -7,18 +10,44 @@ import PageLayout from '../layouts/PageLayout.astro';
   description="YouTube videos and long-form content edited by Boğaç Ülker."
 >
   <section class="page-section">
+    <header class="page-header">
+      <h1 class="page-title">Long-form</h1>
+      <p class="page-description">
+        Documentary edits, highlight packages, and cinematic sports content.
+      </p>
+    </header>
+
     <div class="video-grid">
-      <!-- Video cards will be populated from data in Faz 3/4 -->
-      <p class="placeholder-text">Long-form video content coming soon.</p>
+      {videos.map((video) => (
+        <VideoCard {...video} />
+      ))}
     </div>
   </section>
+
+  <VideoModal />
 </PageLayout>
 
 <style>
   .page-section {
     padding: var(--space-8);
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .page-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .page-title {
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .page-description {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
   }
 
   .video-grid {
@@ -27,20 +56,24 @@ import PageLayout from '../layouts/PageLayout.astro';
     gap: var(--content-gap);
   }
 
-  .placeholder-text {
-    color: var(--color-text-muted);
-    text-align: center;
-    grid-column: 1 / -1;
-    padding: var(--space-16);
+  @media (max-width: 900px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
   }
 
   @media (max-width: 768px) {
     .page-section {
-      padding: var(--space-4);
+      padding: var(--space-6) var(--space-4);
     }
 
-    .video-grid {
-      grid-template-columns: 1fr;
+    .page-header {
+      margin-bottom: var(--space-6);
+    }
+
+    .page-title {
+      font-size: var(--text-xl);
     }
   }
 </style>

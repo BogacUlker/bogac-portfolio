@@ -5,22 +5,30 @@ const aboutData = {
   name: 'Boğaç Ülker',
   title: 'Video Editor & Motion Designer',
   location: 'Dublin, Ireland',
-  bio: 'I am a visual storyteller obsessed with rhythm and emotion. My work bridges the gap between raw documentary realism and stylized cinematic precision.',
+  bio: 'I am a visual storyteller obsessed with rhythm and emotion. My work bridges the gap between raw documentary realism and stylized cinematic precision. From highlight reels to full documentaries, I craft stories that resonate.',
   services: [
     'Video Editing',
     'Motion Graphics',
     'Color Grading',
     'Sound Design',
+    'Sports Content',
   ],
   tools: [
     'Adobe Premiere Pro',
     'After Effects',
     'DaVinci Resolve',
+    'Cinema 4D',
   ],
   experience: [
     { company: 'Socrates Magazine', role: 'Video Editor', current: true },
     { company: 'ShyftUp', role: 'Motion Designer', current: false },
     { company: 'TRTSPOR', role: 'TV Contributor', current: false },
+  ],
+  clients: [
+    'FAI',
+    'Shamrock Rovers',
+    'Socrates Magazine',
+    'TRTSPOR',
   ],
 };
 ---
@@ -81,6 +89,16 @@ const aboutData = {
                 <span class="experience-role">{exp.role}</span>
                 {exp.current && <span class="experience-current">Current</span>}
               </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Clients -->
+        <div class="detail-section">
+          <h2 class="detail-title">Clients</h2>
+          <ul class="detail-list">
+            {aboutData.clients.map((client) => (
+              <li class="detail-item">{client}</li>
             ))}
           </ul>
         </div>

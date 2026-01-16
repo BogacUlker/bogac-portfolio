@@ -1,9 +1,72 @@
 [
   {
     "id": "short-1",
-    "title": "Short Title",
-    "youtubeId": "abc123",
-    "thumbnail": "/images/thumbnails/short-1.jpg",
+    "title": "Game Day Hype",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:45"
+  },
+  {
+    "id": "short-2",
+    "title": "Training Montage",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
     "duration": "0:58"
+  },
+  {
+    "id": "short-3",
+    "title": "Match Winner",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:32"
+  },
+  {
+    "id": "short-4",
+    "title": "Behind The Scenes",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:55"
+  },
+  {
+    "id": "short-5",
+    "title": "Player Spotlight",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:48"
+  },
+  {
+    "id": "short-6",
+    "title": "Trophy Moment",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:38"
+  },
+  {
+    "id": "short-7",
+    "title": "Stadium Vibes",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:42"
+  },
+  {
+    "id": "short-8",
+    "title": "Goal Celebration",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:29"
+  },
+  {
+    "id": "short-9",
+    "title": "Pre-Match Prep",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:51"
+  },
+  {
+    "id": "short-10",
+    "title": "Locker Room Energy",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "duration": "0:44"
   }
 ]

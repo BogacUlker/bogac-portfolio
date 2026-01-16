@@ -1,13 +1,68 @@
 [
   {
     "id": "video-1",
-    "title": "Project Title",
-    "description": "Brief description of the video content.",
+    "title": "Champions League Final Highlights",
+    "description": "Cinematic highlights package from the UEFA Champions League final with dynamic transitions and custom motion graphics.",
     "youtubeId": "dQw4w9WgXcQ",
     "thumbnail": "/images/thumbnails/video-1.jpg",
-    "duration": "12:34",
+    "duration": "8:45",
     "year": "2024",
     "category": "Sports",
+    "role": "Editor"
+  },
+  {
+    "id": "video-2",
+    "title": "Premier League Season Review",
+    "description": "Comprehensive season review documentary featuring key moments, player interviews and statistical analysis.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-2.jpg",
+    "duration": "15:20",
+    "year": "2024",
+    "category": "Documentary",
+    "role": "Editor & Motion"
+  },
+  {
+    "id": "video-3",
+    "title": "Athlete Profile: Rising Star",
+    "description": "Personal documentary exploring the journey of an emerging football talent from academy to first team.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-3.jpg",
+    "duration": "12:15",
+    "year": "2024",
+    "category": "Profile",
+    "role": "Director & Editor"
+  },
+  {
+    "id": "video-4",
+    "title": "Match Day Experience",
+    "description": "Behind-the-scenes look at the atmosphere and preparation before a major derby match.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-4.jpg",
+    "duration": "6:30",
+    "year": "2023",
+    "category": "Sports",
+    "role": "Editor"
+  },
+  {
+    "id": "video-5",
+    "title": "Training Ground Series",
+    "description": "Weekly series capturing the intensity and dedication of professional football training sessions.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-5.jpg",
+    "duration": "10:45",
+    "year": "2023",
+    "category": "Series",
+    "role": "Editor & Colorist"
+  },
+  {
+    "id": "video-6",
+    "title": "Stadium Architecture Documentary",
+    "description": "Visual exploration of iconic football stadiums and their architectural significance.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-6.jpg",
+    "duration": "18:00",
+    "year": "2023",
+    "category": "Documentary",
     "role": "Editor"
   }
 ]
