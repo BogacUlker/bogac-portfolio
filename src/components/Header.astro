@@ -1,0 +1,115 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+
+const navItems = [
+  { href: '/long-form', label: 'Long-form' },
+  { href: '/shorts', label: 'Shorts' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+function isActive(href: string): boolean {
+  return currentPath === href || currentPath.startsWith(href + '/');
+}
+---
+
+<header class="header">
+  <div class="header-content">
+    <a href="/" class="logo">
+      <span class="logo-name">bogaç ülker</span>
+    </a>
+
+    <nav class="nav">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={['nav-link', { 'nav-link-active': isActive(item.href) }]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) var(--space-6);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: opacity 0.2s ease;
+  }
+
+  .logo:hover {
+    opacity: 0.7;
+  }
+
+  .logo-name {
+    font-size: var(--text-lg);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .nav-link-active {
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .header-content {
+      padding: var(--space-3) var(--space-4);
+    }
+
+    .nav {
+      gap: var(--space-4);
+    }
+
+    .nav-link {
+      font-size: var(--text-xs);
+    }
+
+    .logo-name {
+      font-size: var(--text-md);
+    }
+  }
+</style>

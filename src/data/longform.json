@@ -1,0 +1,13 @@
+[
+  {
+    "id": "video-1",
+    "title": "Project Title",
+    "description": "Brief description of the video content.",
+    "youtubeId": "dQw4w9WgXcQ",
+    "thumbnail": "/images/thumbnails/video-1.jpg",
+    "duration": "12:34",
+    "year": "2024",
+    "category": "Sports",
+    "role": "Editor"
+  }
+]

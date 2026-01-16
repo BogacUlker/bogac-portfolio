@@ -1,0 +1,52 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Shorts — Boğaç Ülker"
+  description="Vertical short-form content and reels."
+>
+  <section class="page-section">
+    <div class="shorts-grid">
+      <!-- Short cards will be populated from data in Faz 3/4 -->
+      <p class="placeholder-text">Shorts content coming soon.</p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .page-section {
+    padding: var(--space-8);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--shorts-gap);
+  }
+
+  .placeholder-text {
+    color: var(--color-text-muted);
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: var(--space-16);
+  }
+
+  @media (max-width: 1024px) {
+    .shorts-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-section {
+      padding: var(--space-4);
+    }
+
+    .shorts-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

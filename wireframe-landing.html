@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Wireframe - Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Landing Page */
+        .landing {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* TV Grid */
+        .tv-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 4px;
+            padding: 4px;
+            background: #000;
+        }
+
+        .grid-cell {
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Simulated video loops with gradients */
+        .grid-cell:nth-child(1) { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); }
+        .grid-cell:nth-child(2) { background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); }
+        .grid-cell:nth-child(3) { background: linear-gradient(135deg, #1a1a1a 0%, #3d3d3d 100%); }
+        .grid-cell:nth-child(4) { background: linear-gradient(135deg, #3d3d3d 0%, #1a1a1a 100%); }
+        .grid-cell:nth-child(5) { background: #0a0a0a; } /* Center - Logo */
+        .grid-cell:nth-child(6) { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); }
+        .grid-cell:nth-child(7) { background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%); }
+        .grid-cell:nth-child(8) { background: linear-gradient(135deg, #3d3d3d 0%, #2d2d2d 100%); }
+        .grid-cell:nth-child(9) { background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); }
+
+        /* Video placeholder animation */
+        .grid-cell:not(.center-cell)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Loop label */
+        .loop-label {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .grid-cell:hover .loop-label {
+            opacity: 1;
+        }
+
+        .grid-cell:hover {
+            transform: scale(1.02);
+            z-index: 10;
+            box-shadow: 0 0 30px rgba(255,255,255,0.1);
+        }
+
+        /* Center cell - Logo & Nav */
+        .center-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #000 !important;
+            cursor: default;
+        }
+
+        .center-cell:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .center-cell::before {
+            display: none;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 0.65rem;
+            color: #888;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+
+        /* Alternative: Logo at top */
+        .header-version {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .tv-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .grid-cell {
+                aspect-ratio: 16/9;
+            }
+
+            .center-cell {
+                grid-column: span 2;
+                padding: 30px 20px;
+                order: -1;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+            }
+
+            .nav {
+                gap: 15px;
+            }
+        }
+
+        /* Info Panel - appears on hover */
+        .info-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-cell:hover .info-overlay {
+            transform: translateY(0);
+        }
+
+        .info-overlay h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .info-overlay p {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        /* Page indicator */
+        .scroll-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section title for documentation */
+        .section-title {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 10px;
+            color: #444;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Wireframe notes */
+        .notes {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            max-width: 200px;
+            font-size: 10px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .notes strong {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing">
+        <div class="tv-grid">
+            <!-- Cell 1 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 01</span>
+                <div class="info-overlay">
+                    <h3>Match Highlights</h3>
+                    <p>Sports Editing</p>
+                </div>
+            </div>
+
+            <!-- Cell 2 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 02</span>
+                <div class="info-overlay">
+                    <h3>Title Sequence</h3>
+                    <p>Motion Graphics</p>
+                </div>
+            </div>
+
+            <!-- Cell 3 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 03</span>
+                <div class="info-overlay">
+                    <h3>Documentary</h3>
+                    <p>Long-form Edit</p>
+                </div>
+            </div>
+
+            <!-- Cell 4 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 04</span>
+                <div class="info-overlay">
+                    <h3>Promo Cut</h3>
+                    <p>Commercial</p>
+                </div>
+            </div>
+
+            <!-- Cell 5 - CENTER (Logo & Nav) -->
+            <div class="grid-cell center-cell">
+                <div class="logo">bogaç ülker</div>
+                <div class="subtitle">video editor & motion designer</div>
+                <nav class="nav">
+                    <a href="#longform">Long-form</a>
+                    <a href="#shorts">Shorts</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+
+            <!-- Cell 6 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 05</span>
+                <div class="info-overlay">
+                    <h3>Interview</h3>
+                    <p>Editorial</p>
+                </div>
+            </div>
+
+            <!-- Cell 7 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 06</span>
+                <div class="info-overlay">
+                    <h3>Transition Reel</h3>
+                    <p>Motion Design</p>
+                </div>
+            </div>
+
+            <!-- Cell 8 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 07</span>
+                <div class="info-overlay">
+                    <h3>Color Grade</h3>
+                    <p>Before/After</p>
+                </div>
+            </div>
+
+            <!-- Cell 9 -->
+            <div class="grid-cell">
+                <span class="loop-label">Loop 08</span>
+                <div class="info-overlay">
+                    <h3>Sound Design</h3>
+                    <p>Audio Visual</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notes">
+        <strong>Wireframe Notes:</strong><br><br>
+        • Her kare 3-5sn loop<br>
+        • Ortada logo + nav<br>
+        • Hover'da proje bilgisi<br>
+        • Mobilde 2 sütun<br>
+        • Autoplay, muted
+    </div>
+
+    <div class="section-title">Landing Page — v1</div>
+</body>
+</html>

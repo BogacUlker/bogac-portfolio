@@ -1,0 +1,9 @@
+[
+  {
+    "id": "short-1",
+    "title": "Short Title",
+    "youtubeId": "abc123",
+    "thumbnail": "/images/thumbnails/short-1.jpg",
+    "duration": "0:58"
+  }
+]

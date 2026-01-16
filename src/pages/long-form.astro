@@ -1,0 +1,46 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Long-form — Boğaç Ülker"
+  description="YouTube videos and long-form content edited by Boğaç Ülker."
+>
+  <section class="page-section">
+    <div class="video-grid">
+      <!-- Video cards will be populated from data in Faz 3/4 -->
+      <p class="placeholder-text">Long-form video content coming soon.</p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .page-section {
+    padding: var(--space-8);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--content-gap);
+  }
+
+  .placeholder-text {
+    color: var(--color-text-muted);
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: var(--space-16);
+  }
+
+  @media (max-width: 768px) {
+    .page-section {
+      padding: var(--space-4);
+    }
+
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

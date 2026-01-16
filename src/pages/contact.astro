@@ -1,0 +1,231 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+
+const socialLinks = [
+  { icon: 'ph-envelope', label: 'Email', href: 'mailto:hello@bogaculker.com' },
+  { icon: 'ph-linkedin-logo', label: 'LinkedIn', href: '#' },
+  { icon: 'ph-instagram-logo', label: 'Instagram', href: '#' },
+  { icon: 'ph-x-logo', label: 'X / Twitter', href: '#' },
+  { icon: 'ph-youtube-logo', label: 'YouTube', href: '#' },
+];
+---
+
+<PageLayout
+  title="Contact — Boğaç Ülker"
+  description="Get in touch for video editing and motion design projects."
+>
+  <section class="contact-section">
+    <div class="contact-grid">
+      <!-- Left Column: Info -->
+      <div class="info-column">
+        <h1 class="contact-title">Let's Work Together</h1>
+        <p class="contact-description">
+          Have a project in mind? I'd love to hear about it. Reach out through
+          the form or connect with me on social media.
+        </p>
+
+        <div class="social-links">
+          {socialLinks.map((link) => (
+            <a href={link.href} class="social-link" target="_blank" rel="noopener">
+              <i class={`ph ${link.icon} icon-md`}></i>
+              <span class="social-label">{link.label}</span>
+              <i class="ph ph-arrow-up-right icon-sm"></i>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right Column: Form -->
+      <div class="form-column">
+        <form
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          class="contact-form"
+        >
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="form-input"
+              placeholder="Your name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="form-input"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              class="form-textarea"
+              placeholder="Tell me about your project..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="form-button">
+            Send Message
+            <i class="ph ph-arrow-right icon-sm"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .contact-section {
+    padding: var(--space-8);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-16);
+  }
+
+  /* Info Column */
+  .info-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-title {
+    font-size: var(--text-2xl);
+    font-weight: 500;
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-description {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-8);
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background-color: var(--color-bg-card);
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+
+  .social-link:hover {
+    background-color: var(--color-bg-card-hover);
+  }
+
+  .social-label {
+    flex: 1;
+    font-size: var(--text-md);
+  }
+
+  /* Form Column */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .form-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    color: var(--color-text-muted);
+  }
+
+  .form-input,
+  .form-textarea {
+    background-color: var(--color-bg-card);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 6px;
+    padding: var(--space-4);
+    font-size: var(--text-md);
+    color: var(--color-text-primary);
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-border-primary);
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background-color: var(--color-text-primary);
+    color: var(--color-bg-primary);
+    border: none;
+    border-radius: 6px;
+    padding: var(--space-4) var(--space-6);
+    font-size: var(--text-md);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .form-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-section {
+      padding: var(--space-4);
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .contact-title {
+      font-size: var(--text-xl);
+    }
+  }
+</style>
