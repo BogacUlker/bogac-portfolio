@@ -68,7 +68,11 @@ const { id, title, youtubeId, thumbnail, duration } = Astro.props;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2);
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.5) 0%,
+      transparent 50%
+    );
     display: flex;
     align-items: center;
     justify-content: center;
@@ -89,7 +93,9 @@ const { id, title, youtubeId, thumbnail, duration } = Astro.props;
     align-items: center;
     justify-content: center;
     color: var(--color-bg-primary);
-    transition: transform 0.2s ease;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
   }
 
   .play-button i {
@@ -97,7 +103,8 @@ const { id, title, youtubeId, thumbnail, duration } = Astro.props;
   }
 
   .short-card:hover .play-button {
-    transform: scale(1.1);
+    transform: scale(1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   }
 
   .short-info {

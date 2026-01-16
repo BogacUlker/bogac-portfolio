@@ -10,14 +10,14 @@ import shorts from '../data/shorts.json';
   description="Vertical short-form content, reels, and social media edits by Boğaç Ülker."
 >
   <section class="page-section">
-    <header class="page-header">
+    <header class="page-header scroll-animate">
       <h1 class="page-title">Shorts</h1>
       <p class="page-description">
         Vertical content for social media, reels, and quick-hit sports moments.
       </p>
     </header>
 
-    <div class="shorts-grid">
+    <div class="shorts-grid stagger-children">
       {shorts.map((short) => (
         <ShortCard {...short} />
       ))}

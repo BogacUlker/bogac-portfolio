@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -39,8 +40,17 @@ const siteName = 'Boğaç Ülker';
     <meta name="twitter:image" content={ogImage} />
 
     <title>{title}</title>
+    <ViewTransitions />
   </head>
   <body>
-    <slot />
+    <main class="page-content" transition:animate="fade">
+      <slot />
+    </main>
   </body>
 </html>
+
+<style>
+  .page-content {
+    min-height: 100vh;
+  }
+</style>

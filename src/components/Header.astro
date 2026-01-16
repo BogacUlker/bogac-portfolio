@@ -17,17 +17,18 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="header">
+<header class="header" transition:persist>
   <div class="header-content">
     <a href="/" class="logo">
       <span class="logo-name">bogaç ülker</span>
     </a>
 
     <nav class="nav">
-      {navItems.map((item) => (
+      {navItems.map((item, index) => (
         <a
           href={item.href}
           class:list={['nav-link', { 'nav-link-active': isActive(item.href) }]}
+          style={`--delay: ${index * 0.05}s`}
         >
           {item.label}
         </a>
@@ -80,6 +81,7 @@ function isActive(href: string): boolean {
   }
 
   .nav-link {
+    position: relative;
     font-size: var(--text-sm);
     text-transform: uppercase;
     letter-spacing: var(--tracking-wider);
@@ -87,12 +89,31 @@ function isActive(href: string): boolean {
     transition: color 0.2s ease;
   }
 
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-text-primary);
+    transition: width 0.3s ease;
+  }
+
   .nav-link:hover {
     color: var(--color-text-primary);
   }
 
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
   .nav-link-active {
     color: var(--color-text-primary);
+  }
+
+  .nav-link-active::after {
+    width: 100%;
   }
 
   @media (max-width: 768px) {

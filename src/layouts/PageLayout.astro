@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
+import ScrollAnimations from '../components/ScrollAnimations.astro';
 
 interface Props {
   title: string;
@@ -17,6 +18,7 @@ const currentPath = Astro.url.pathname;
   <main class="main-content">
     <slot />
   </main>
+  <ScrollAnimations />
 </BaseLayout>
 
 <style>

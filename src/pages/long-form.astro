@@ -10,14 +10,14 @@ import videos from '../data/longform.json';
   description="YouTube videos and long-form content edited by Boğaç Ülker."
 >
   <section class="page-section">
-    <header class="page-header">
+    <header class="page-header scroll-animate">
       <h1 class="page-title">Long-form</h1>
       <p class="page-description">
         Documentary edits, highlight packages, and cinematic sports content.
       </p>
     </header>
 
-    <div class="video-grid">
+    <div class="video-grid stagger-children">
       {videos.map((video) => (
         <VideoCard {...video} />
       ))}

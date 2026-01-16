@@ -1,0 +1,106 @@
+---
+interface Props {
+  type?: 'video' | 'short';
+}
+
+const { type = 'video' } = Astro.props;
+---
+
+<div class:list={['skeleton-card', `skeleton-${type}`]}>
+  <div class="skeleton-thumbnail"></div>
+  <div class="skeleton-content">
+    <div class="skeleton-title"></div>
+    {type === 'video' && (
+      <>
+        <div class="skeleton-description"></div>
+        <div class="skeleton-meta"></div>
+      </>
+    )}
+    {type === 'short' && (
+      <div class="skeleton-duration"></div>
+    )}
+  </div>
+</div>
+
+<style>
+  .skeleton-card {
+    background-color: var(--color-bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .skeleton-thumbnail,
+  .skeleton-title,
+  .skeleton-description,
+  .skeleton-meta,
+  .skeleton-duration {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-card) 25%,
+      var(--color-bg-card-hover) 50%,
+      var(--color-bg-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Video Skeleton */
+  .skeleton-video .skeleton-thumbnail {
+    aspect-ratio: 16 / 9;
+  }
+
+  .skeleton-video .skeleton-content {
+    padding: var(--space-4);
+  }
+
+  .skeleton-video .skeleton-title {
+    height: 20px;
+    border-radius: 4px;
+    margin-bottom: var(--space-2);
+    width: 80%;
+  }
+
+  .skeleton-video .skeleton-description {
+    height: 14px;
+    border-radius: 4px;
+    margin-bottom: var(--space-3);
+    width: 100%;
+  }
+
+  .skeleton-video .skeleton-meta {
+    height: 12px;
+    border-radius: 4px;
+    width: 60%;
+  }
+
+  /* Short Skeleton */
+  .skeleton-short .skeleton-thumbnail {
+    aspect-ratio: 9 / 16;
+  }
+
+  .skeleton-short .skeleton-content {
+    padding: var(--space-3);
+  }
+
+  .skeleton-short .skeleton-title {
+    height: 14px;
+    border-radius: 4px;
+    margin-bottom: var(--space-1);
+    width: 90%;
+  }
+
+  .skeleton-short .skeleton-duration {
+    height: 10px;
+    border-radius: 4px;
+    width: 40%;
+  }
+</style>
