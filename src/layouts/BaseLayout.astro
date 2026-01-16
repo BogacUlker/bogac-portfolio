@@ -10,7 +10,7 @@ interface Props {
 
 const { title, description, ogImage = '/og-image.jpg' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const siteName = 'Boğaç Ülker';
+const siteName = 'Bogac Ulker';
 ---
 
 <!doctype html>
@@ -18,7 +18,7 @@ const siteName = 'Boğaç Ülker';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Boğaç Ülker" />
+    <meta name="author" content="Bogac Ulker" />
     <meta name="robots" content="index, follow" />
     <meta name="description" content={description} />
 
